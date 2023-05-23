@@ -1,0 +1,101 @@
+
+ {% extends 'base.html' %}
+ {% block body %}
+
+
+  <div class ="container mb-4" >
+    {% include '_messages.html' %}
+    <form  action="/", method="POST">
+      <div class="mb-3 ">
+        <label for="exampleInputEmail1" class="form-label"><b> Title </b> </label>
+        <input type="text" name="Title"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label"> <b> Description </b></label>
+        <input type="text"  name="Description"     class="form-control" id="exampleInputPassword1">
+      </div>
+      
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+ 
+
+  <div class="container">
+
+
+    {% if  current_user.is_authenticated %}
+    
+       {% if blognet_new|length == 0 %}
+      <div class="alert alert-primary" role="alert">
+        Please enter the task
+       </div>
+ 
+      
+        {% else %}
+  
+      
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Sr.no</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Time</th>
+            <th scope="col">Actions </th>
+  
+          </tr>
+        </thead>
+      <tbody>
+          {% for blog in blognet_new %}
+    
+      <tr>
+        <th scope="row">{{ loop.index }}</th>
+        <td>{{ blog.Title }}</td>
+        <td>{{ blog.Description }}</td>
+        <td>{{ blog.time_stamp }}</td>
+        <td><a href="/update/{{ blog.Srno }}" type="button" class="btn btn-outline-primary btn-sm">Update</button>
+          <a href="/delete/{{ blog.Srno }}" type="button" class="btn btn-dark mx-2 btn-sm">Delete</button>
+        </td>
+       
+        
+      </tr>
+            {% endfor %}
+
+    </tbody>
+  </table>
+
+      
+
+
+            {% endif %}
+
+    
+ 
+
+
+
+    {% else %}
+
+    <div class="text-center mt-5 pt-5 ">
+      <h4 class="text-center mb-3 "> You need to log in to access your Daily schedule  </h4>
+      
+      <a href="{{url_for('Login')}}" class ="btn btn-outline-primary p-2  me-2">Login</a>
+      <a href="{{url_for('register')}}" class ="btn btn-dark p-2 me-2">Sign up</a>
+    </div>
+      
+    {% endif %}
+
+     
+   
+
+
+  </div>
+  
+
+
+
+
+
+  {% endblock body %}
+

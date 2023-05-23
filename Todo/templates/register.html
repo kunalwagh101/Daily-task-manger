@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+        <div>
+          {% from "_formhelpers.html" import render_field %}
+            <h1 class="rounded bg-primary py-4 text-center text-white"> <b>Register </b>  </h1>
+           <div class="container mt-3  ">
+            {% include '_messages.html' %}
+            <form   method="POST">
+              {{ form.hidden_tag() }}
+
+                <div class="mb-2 ">
+                    <label for="exampleInputEmail1" class="form-label"> <b>Name : </b>  </label>
+                    {{ form.username(class =" form-control  border border-dark") }}
+                  
+                  </div>
+                <div class="mb-2">
+                  {{  render_field(form.email,class =" mt-1 form-control  border border-dark") }}
+                
+                </div>
+                <div class="mb-2">
+                  
+               
+                  {{ render_field(form.password,class =" mt-1 form-control  border border-dark") }}
+                </div>
+                <div class="mb-2">
+                   
+                    {{ render_field(form.confirm ,class =" mt-1 form-control  border border-dark") }}
+                  </div>
+              
+                  {{ form.submit(class =" btn btn-primary px-3 mt-3") }}
+
+              </form>
+               <div class="text-center mt-2">
+                <p> have account ? Login her </p>
+                <a href="{{url_for('Login')}}" type="button" class="btn btn-outline-primary
+                " >Login</a>
+               </div>
+
+
+           </div>
+        </div>
+
+        </div>
+        <div class="col-md-3"></div>
+
+    </div>
+</div>
+    
+{% endblock  %}
